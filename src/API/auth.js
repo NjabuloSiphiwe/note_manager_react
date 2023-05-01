@@ -1,0 +1,21 @@
+import {
+    signOut,signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from "firebase/auth";
+import { firebaseApp } from "utils/firebase";
+
+export class AuthAPI {
+   
+        static async signin (email,password) {
+            const response = await signInWithEmailAndPassword(firebaseApp.auth,email,password);
+            return response.user.toJSON();
+        }
+        static async signup(email,password) {
+                const response = await createUserWithEmailAndPassword(firebaseApp.auth,email,password);
+                return response.user.toJSON();
+            }
+        static async signout() {
+            signOut(firebaseApp.auth);
+        }
+    
+}
